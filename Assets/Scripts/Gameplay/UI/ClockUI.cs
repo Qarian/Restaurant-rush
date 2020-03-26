@@ -1,29 +1,3 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-public class ClockUI : MonoBehaviour
-{
-    public Image face;
-    private Vector3 facePosition;
-    [SerializeField] RectTransform clockHand = default;
-
-    private Animator anim = default;
-
-    private void Awake()
-    {
-        anim = GetComponentInChildren<Animator>();
-        
-        if (face is null)
-            Debug.LogError("no clock face image in Clock UI");
-        else
-            facePosition = face.transform.position;
-
-        if (clockHand is null)
-            Debug.LogError("no clock hand attached to Clock UI");
-    }
-
-    public void RotateClock(float degree)
-    {
-        clockHand.RotateAround(facePosition, Vector3.forward, -degree);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:ee20e021b640d92a831c848e20b068a7d5bb9d0fcb2d90c640cc8a4dd14527a8
+size 357

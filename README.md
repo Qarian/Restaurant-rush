@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7dbd9e2df8372564fc782f45d25a13cf744b21bd19b9a3b73bbbf187a9711048
-size 458
+# Restaurant Rush
+###### formerly known as *Symulator Kelnera (Waiter Simulator)*
+
+## Description
+
+The game consists of fulfilling basic tasks that a waiter at a restaurant would be asked to do.
+
+Player has to *jump around* the restaurant to get to the customers to serve to them.\
+Player can run up the restaurant's walls to deliver the food the fastest way possible.
+
+*The key to success is **speed***.
+
+## Core loop
+
+![core loop diagram](core-loop.png)
+
+

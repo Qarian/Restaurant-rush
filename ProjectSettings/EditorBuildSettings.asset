@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2be0fd0b6d7a15b63bf9a3ce88a6f7a60df98b24ced647aa890282934c07f796
-size 352
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Dorian Scene.unity
+    guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 1
+    path: Assets/Scenes/Empty.unity
+    guid: 59f9aed0bbe501e4da1e7f574ecaadaf
+  m_configObjects: {}

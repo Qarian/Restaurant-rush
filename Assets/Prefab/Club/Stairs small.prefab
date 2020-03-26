@@ -8962,7 +8962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2408559223086159661}
   m_Layer: 0
-  m_Name: Stairs small
+  m_Name: Stairs small R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11297,7 +11297,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a14f492e095c56446a71f7c5492a796e, type: 2}
+  - {fileID: 2100000, guid: 99688af1a07e967459b415f7c3de49c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
