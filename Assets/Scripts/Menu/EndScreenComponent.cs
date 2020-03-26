@@ -1,3 +1,38 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:87766b1c61ecf7cdcdfdb641c1c538d29de8388242d6029c91ad1b0b302ee3d3
-size 1092
+using UnityEngine;
+using TMPro;
+using DG.Tweening;
+using UnityEngine.SceneManagement;
+
+public class EndScreenComponent : MonoBehaviour
+{
+    [Header("References")]
+    [SerializeField] private TextMeshProUGUI needed = default;
+    [SerializeField] private TextMeshProUGUI earned = default;
+    [SerializeField] private TextMeshProUGUI profit = default;
+    [SerializeField] private TextMeshProUGUI bank = default;
+
+    [Header("Values")]
+    [SerializeField] private float appearanceTime = 1.5f;
+
+    private void Start()
+    {
+        transform.DOMove(Vector3.zero, appearanceTime).SetEase(Ease.OutSine);
+
+        float neededScore = GameManager.singleton.PointsManager.neededScore;
+        float score = GameManager.singleton.PointsManager.score;
+
+        needed.text = neededScore.ToString();
+        earned.text = score.ToString();
+
+        // TODO Check success or failure
+        profit.text = (score - neededScore).ToString();
+        // TODO Saving Bank
+        bank.text = profit.text;
+    }
+
+    public void NextStage()
+    {
+        Debug.Log("Next Stage");
+        SceneManager.LoadSceneAsync(0);
+    }
+}

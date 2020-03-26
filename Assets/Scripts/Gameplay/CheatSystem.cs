@@ -8,7 +8,7 @@ public class CheatSystem : MonoBehaviour
     // Start is called before the first frame update
     string cheat;
     public GameObject inputField;
-    [SerializeField] private GameObject cheatsUI;
+    [SerializeField] private GameObject cheatsUI = default;
     private GameObject search;
     [SerializeField] private int cheatMoney = 100;
     [SerializeField] private float cheatAccelerationMultiplier = 2;
