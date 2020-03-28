@@ -10,6 +10,7 @@ TagManager:
   - Queue
   - Light
   - UI
+  - ZipLine
   layers:
   - Default
   - TransparentFX
