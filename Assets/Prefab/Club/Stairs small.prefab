@@ -5681,7 +5681,7 @@ GameObject:
   - component: {fileID: 2408559223032729426}
   - component: {fileID: 2408559223032729425}
   - component: {fileID: 2408559223032729424}
-  - component: {fileID: 2408559223032729439}
+  - component: {fileID: 7736346283213325939}
   m_Layer: 0
   m_Name: Under Stairs
   m_TagString: Untagged
@@ -5965,8 +5965,8 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!64 &2408559223032729439
-MeshCollider:
+--- !u!65 &7736346283213325939
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5975,10 +5975,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 4.913465, y: 0.33144826, z: 3.0259743}
+  m_Center: {x: -0.49723348, y: 1.0620601, z: 0.49328804}
 --- !u!1 &2408559223050417318
 GameObject:
   m_ObjectHideFlags: 0
