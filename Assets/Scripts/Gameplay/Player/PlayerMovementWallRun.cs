@@ -9,7 +9,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 	[Space]
 	public float accelaration = 10f;
 	public float maxSpeed = 10f;
-	[SerializeField, Range(0, 1), Tooltip("0 - no vertical movement while wall running,\n1 - no effect")]
+	[SerializeField, Range(0, 1), Tooltip("0 - no vertical movement while wall running,\n1 - no change")]
 	private float verticalSpeedModifierWallRunning = 0.85f;
 
 	[SerializeField] public float jumpForce = 10f;
@@ -27,7 +27,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 	private float cameraRotationTarget = 0;
 	private float currentCameraRotation = 0;
 
-	// Componets
+	// Components
 	private Rigidbody rb;
 	private Transform playerTransform;
 
@@ -38,6 +38,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	// Jumping
 	private bool onGround = false;
+	private Vector3 groundNormalVector;
 	private bool canJump = true;
 
 	// Properties for wall running
@@ -100,7 +101,9 @@ public class PlayerMovementWallRun : MonoBehaviour
 			Vector3 speedGain = Vector3.zero;
 			speedGain += moveAxis.z * playerTransform.forward;
 			speedGain += moveAxis.x * playerTransform.right;
-			speedGain = speedGain.normalized * accelaration * Time.fixedDeltaTime;
+			speedGain = Vector3.ProjectOnPlane(speedGain.normalized, groundNormalVector);
+			speedGain = speedGain.normalized * (accelaration * Time.fixedDeltaTime);
+			speedGain = new Vector3(speedGain.x, speedGain.y * 2f, speedGain.z);
 			rb.velocity = Vector3.ClampMagnitude(rb.velocity + speedGain, maxSpeed);
 		}
 		else
@@ -237,6 +240,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 	private void CheckGround()
 	{
 		bool hit = Physics.Raycast(groundChecker.position, Vector3.down, out raycastHit, 0.2f, raycastLayerMask);
+		groundNormalVector = raycastHit.normal;
 		if (hit)
 		{
 			onGround = true;
