@@ -6,20 +6,19 @@ public class ClockUI : MonoBehaviour
     public Image face;
     private Vector3 facePosition;
     [SerializeField] RectTransform clockHand = default;
-
-    private Animator anim = default;
-
+    
     private void Awake()
     {
-        anim = GetComponentInChildren<Animator>();
-        
         if (face is null)
-            Debug.LogError("no clock face image in Clock UI");
+            Debug.LogError("no clock face image in Clock UI", gameObject);
         else
-            facePosition = face.transform.position;
+        {
+            Vector3 position = face.transform.position;
+            facePosition = new Vector3(position.x, position.y + (position.y - transform.position.y)/ 2);
+        }
 
         if (clockHand is null)
-            Debug.LogError("no clock hand attached to Clock UI");
+            Debug.LogError("no clock hand attached to Clock UI", gameObject);
     }
 
     public void RotateClock(float degree)

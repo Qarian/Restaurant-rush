@@ -193,7 +193,6 @@ MonoBehaviour:
   player: {fileID: 4676869844423272728}
   cameraSpeed: 5
   cameraYbounds: {x: -60, y: 60}
-  mouseModeSwitch: 109
 --- !u!114 &7466768534173845569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4d37a082631754686c023dd7675e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRigidbody: {fileID: 0}
+  playerRigidbody: {fileID: 4676869844423272730}
   holdingPoints:
   - {fileID: 7404722689453589500}
   - {fileID: 215347973538994108}

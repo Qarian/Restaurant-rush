@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 4720710156935636044}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 19}
-  m_SizeDelta: {x: 8, y: 38}
+  m_SizeDelta: {x: -133, y: -102}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7767888527545717034
 CanvasRenderer:
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 3300186377933251326}
   - component: {fileID: 6574772087066968066}
   - component: {fileID: 2428090777029088744}
-  - component: {fileID: 3590592867864772206}
+  - component: {fileID: 1557585367235073285}
   m_Layer: 0
   m_Name: Clock Canvas
   m_TagString: Untagged
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3590592867864772206
+--- !u!114 &1557585367235073285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4567941313618716319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973a5ae1883752545bce382aba038778, type: 3}
+  m_Script: {fileID: 11500000, guid: e657df812446d594d8d4dd420c4560a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   face: {fileID: 2697926706641907373}
@@ -222,7 +222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -69.999985}
+  m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1917200459480668526

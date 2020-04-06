@@ -16,7 +16,7 @@ public class FoodSpawner : MonoBehaviour
         }
         
         if (spawnPoints.Count == 0)
-            Debug.LogError("No food spawning points!");
+            Debug.LogError("No food spawning points!", gameObject);
 
         Singleton = this;
     }
