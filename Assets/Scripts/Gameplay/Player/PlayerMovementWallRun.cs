@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class PlayerMovementWallRun : MonoBehaviour
 {
@@ -42,8 +44,8 @@ public class PlayerMovementWallRun : MonoBehaviour
 	private bool canJump = true;
 
 	// Properties for wall running
-	private enum Wall { Left = -1, No = 0, Right = 1}
-	private Wall status = Wall.No;
+	private enum Wall { LeftWall = -1, NotAtWall = 0, RightWall = 1}
+	private Wall status = Wall.NotAtWall;
 	private Vector3 wallDir;
 	private Vector3 wallCheckDir;
 	private Collider wallRunningCollider;
@@ -72,9 +74,37 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	private void Update()
 	{
+		CheckInput();
+	}
+	
+	private void FixedUpdate()
+	{
+		lastVelocity = rb.velocity = status == Wall.NotAtWall ? SetGroundVelocity() : SetWallVelocity(rb.velocity);
+	}
+
+	
+	private void LateUpdate()
+	{
+		UpdateCamera();
+	}
+
+	private void UpdateCamera()
+	{
+		// Rotate camera
+        		float offset = 0f;
+        		Vector3 cameraRotation = cameraTransform.localRotation.eulerAngles;
+        		currentCameraRotation = Mathf.Lerp(currentCameraRotation, cameraRotationTarget, Time.deltaTime * rotationSpeed);
+        		if(status != Wall.NotAtWall && moveAxis != Vector3.zero)
+        			 offset = Random.Range(-0.25f, 0.25f);
+        		cameraRotation.z = currentCameraRotation+offset;
+        		cameraTransform.localRotation = Quaternion.Euler(cameraRotation);
+	}
+
+	private void CheckInput()
+	{
 		position = playerTransform.position;
 		right = playerTransform.right;
-
+        
 		if (registerInput)
 		{
 			moveAxis = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -82,53 +112,44 @@ public class PlayerMovementWallRun : MonoBehaviour
 		}
 		else
 			moveAxis = Vector3.zero;
-
-		CheckGround();
-        WallRunning();
         
-
-		// Rotate camera
-		Vector3 cameraRotation = cameraTransform.localRotation.eulerAngles;
-		currentCameraRotation = Mathf.Lerp(currentCameraRotation, cameraRotationTarget, Time.deltaTime * rotationSpeed);
-		cameraRotation.z = currentCameraRotation;
-		cameraTransform.localRotation = Quaternion.Euler(cameraRotation);
-    }
-
-	private void FixedUpdate()
+		CheckGround();
+		WallRunning();
+	}
+	
+	Vector3  SetWallVelocity(Vector3 speed)
 	{
-		if (status == Wall.No)
-		{
-			Vector3 speedGain = Vector3.zero;
-			speedGain += moveAxis.z * playerTransform.forward;
-			speedGain += moveAxis.x * playerTransform.right;
-			speedGain = Vector3.ProjectOnPlane(speedGain.normalized, groundNormalVector);
-			speedGain = speedGain.normalized * (accelaration * Time.fixedDeltaTime);
-			speedGain = new Vector3(speedGain.x, speedGain.y * 2f, speedGain.z);
-			rb.velocity = Vector3.ClampMagnitude(rb.velocity + speedGain, maxSpeed);
-		}
-		else
-		{
-			Vector3 velocity = rb.velocity;
-			velocity.y *= verticalSpeedModifierWallRunning * Time.fixedDeltaTime;
-			velocity += (wallDir * accelaration * Time.fixedDeltaTime);
+		speed.y *= verticalSpeedModifierWallRunning * Time.fixedDeltaTime;
+		speed += (wallDir * accelaration * Time.fixedDeltaTime);
 
-			// Smooth going through acute angles
-			float velocityChange = lastVelocity.magnitude / velocity.magnitude;
-			if (velocityChange > 1f)
-				// Something lower than velocityChange for big velocityChange
-				velocity *= Mathf.Sqrt(velocityChange) * (1 + Mathf.Log(velocityChange));
+		// Smooth going through acute angles
+		float velocityChange = lastVelocity.magnitude / speed.magnitude;
+		if (velocityChange > 1f)
+			// Something lower than velocityChange for big velocityChange
+			speed *= Mathf.Sqrt(velocityChange) * (1 + Mathf.Log(velocityChange));
 
-			// TODO: maxSpeed should clamp only velocity on x and z
-			rb.velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-		}
-		lastVelocity = rb.velocity;
+		// TODO: maxSpeed should clamp only velocity on x and z
+		speed = Vector3.ClampMagnitude(speed, maxSpeed);
+		return speed;
 	}
 
+	Vector3  SetGroundVelocity()
+	{
+		Vector3 speedGain = Vector3.zero;
+		speedGain += moveAxis.z * playerTransform.forward;
+		speedGain += moveAxis.x * playerTransform.right;
+		speedGain = Vector3.ProjectOnPlane(speedGain.normalized, groundNormalVector);
+		speedGain = speedGain.normalized * (accelaration * Time.fixedDeltaTime);
+		speedGain = new Vector3(speedGain.x, speedGain.y * 2f, speedGain.z);
+		return Vector3.ClampMagnitude(rb.velocity + speedGain, maxSpeed);
+	}
+
+	
 	#region WallRunning
 	private void WallRunning()
     {
 		// Start Wall running
-		if (status == Wall.No)
+		if (status == Wall.NotAtWall)
 		{
 			if (Input.GetKey(jumpKey) && !onGround && (Time.time - leftWallTime) >= wallJumpTime)
 				CheckForWall();
@@ -158,31 +179,34 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	private void CheckForWall()
 	{
-		bool rayHit = RaycastToSide(Wall.Left, out raycastHit);
+		bool rayHit = RaycastToSide(Wall.LeftWall, out raycastHit);
 		if (rayHit)
 		{
 			if (Vector3.Dot(raycastHit.normal, Vector3.up) < 0.001f)
-				SetWallRunning(Wall.Left);
+				SetWallRunning(Wall.LeftWall);
 		}
 
-		rayHit = RaycastToSide(Wall.Right, out raycastHit);
+		rayHit = RaycastToSide(Wall.RightWall, out raycastHit);
 		if (rayHit)
 		{
 			if (Vector3.Dot(raycastHit.normal, Vector3.up) < 0.001f)
 			{
 				float rightDistance = Vector3.Distance(raycastHit.point, position);
 				if (rightDistance < wallRaycastLength)
-					SetWallRunning(Wall.Right);
+					SetWallRunning(Wall.RightWall);
 			}
 		}
 	}
 
 	private void SetWallRunning(Wall side)
 	{
+		var FOV = cameraTransform.GetComponent<Camera>().fieldOfView;
+		DOTween.To(x => cameraTransform.GetComponent<Camera>().fieldOfView = x, FOV,FOV+20f,1f );
+		
 		wallRunningCollider = raycastHit.collider;
 		status = side;
 		wallCheckDir = -raycastHit.normal;
-		if (side == Wall.Left)
+		if (side == Wall.LeftWall)
 			wallDir = Vector3.Cross(raycastHit.normal, Vector3.up);
 		else
 			wallDir = -1 * Vector3.Cross(raycastHit.normal, Vector3.up);
@@ -195,10 +219,10 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	private bool RaycastToSide(Wall side, out RaycastHit raycastHit)
 	{
-		if (side == Wall.No)
+		if (side == Wall.NotAtWall)
 			throw new System.Exception("Need to specify side for raycast in wallrunning");
 		Vector3 dir = right;
-		if (side == Wall.Left)
+		if (side == Wall.LeftWall)
 			dir *= -1;
 
 		if (Physics.Raycast(position, dir, out raycastHit, wallRaycastLength, raycastLayerMask))
@@ -211,9 +235,10 @@ public class PlayerMovementWallRun : MonoBehaviour
 	private void StopWallRunning()
 	{
 		cameraRotationTarget = 0;
-
 		rb.useGravity = true;
-		status = Wall.No;
+		status = Wall.NotAtWall;
+		var FOV = cameraTransform.GetComponent<Camera>().fieldOfView;
+		DOTween.To(x => cameraTransform.GetComponent<Camera>().fieldOfView = x, FOV,FOV-20f,1f );
 		canJump = true;
 	}
 	#endregion
