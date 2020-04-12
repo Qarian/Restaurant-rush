@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Dorian Scene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/Main Menu.unity
+    guid: 8dcced52a5ad61f40a6c9a6fb057c35e
   - enabled: 1
-    path: Assets/Scenes/Empty.unity
-    guid: 59f9aed0bbe501e4da1e7f574ecaadaf
+    path: Assets/Scenes/SKS.unity
+    guid: 0db8dd1e979b1cc41bcbb3e20ddb85ee
+  - enabled: 1
+    path: Assets/Scenes/fcclub.unity
+    guid: 30f13fc6bc571f2448d5cbb29e9d7115
   m_configObjects: {}

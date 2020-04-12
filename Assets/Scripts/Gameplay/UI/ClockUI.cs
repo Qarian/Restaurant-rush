@@ -4,18 +4,16 @@ using UnityEngine.UI;
 public class ClockUI : MonoBehaviour
 {
     public Image face;
+    [SerializeField] Transform faceCenter = default;
     private Vector3 facePosition;
     [SerializeField] RectTransform clockHand = default;
     
     private void Awake()
     {
-        if (face is null)
+        if (faceCenter is null)
             Debug.LogError("no clock face image in Clock UI", gameObject);
         else
-        {
-            Vector3 position = face.transform.position;
-            facePosition = new Vector3(position.x, position.y + (position.y - transform.position.y)/ 2);
-        }
+            facePosition = faceCenter.position;
 
         if (clockHand is null)
             Debug.LogError("no clock hand attached to Clock UI", gameObject);
