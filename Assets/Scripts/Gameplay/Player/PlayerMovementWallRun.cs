@@ -8,7 +8,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 	[SerializeField] private Transform groundChecker = default;
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
-	[Space]
+    [Space]
 	public float accelaration = 10f;
 	public float maxSpeed = 10f;
 	[SerializeField, Range(0, 1), Tooltip("0 - no vertical movement while wall running,\n1 - no change")]
@@ -20,12 +20,13 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	[Header("Camera modification")]
 	[SerializeField] private Transform cameraTransform = default;
+	[SerializeField] private Camera camera = default;
+
 	[SerializeField] private float maxCameraRotation = 30f;
 	[SerializeField] private float rotationSpeed = 0.5f;
 
     public static PlayerMovementWallRun singleton;
-
-	// Rotating camera during wall running
+    // Rotating camera during wall running
 	private float cameraRotationTarget = 0;
 	private float currentCameraRotation = 0;
 
@@ -59,8 +60,10 @@ public class PlayerMovementWallRun : MonoBehaviour
 	
 	private bool registerInput = true;
 
+
 	private void Start()
 	{
+		camera = cameraTransform.GetComponent<Camera>();
 		rb = GetComponent<Rigidbody>();
         playerTransform = transform;
 		// set mask for raycasts to ignore player layer
@@ -200,9 +203,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	private void SetWallRunning(Wall side)
 	{
-		var FOV = cameraTransform.GetComponent<Camera>().fieldOfView;
-		DOTween.To(x => cameraTransform.GetComponent<Camera>().fieldOfView = x, FOV,FOV+20f,1f );
-		
+		ZoomCamera(20f);
 		wallRunningCollider = raycastHit.collider;
 		status = side;
 		wallCheckDir = -raycastHit.normal;
@@ -215,6 +216,12 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 		// TODO: Set 
 		cameraRotationTarget = maxCameraRotation * (int)side;
+	}
+
+	private void ZoomCamera(float zoom)
+	{
+		var FOV = camera.fieldOfView;
+    	DOTween.To(x => camera.fieldOfView = x, FOV,FOV+zoom,1f );
 	}
 
 	private bool RaycastToSide(Wall side, out RaycastHit raycastHit)
@@ -237,8 +244,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 		cameraRotationTarget = 0;
 		rb.useGravity = true;
 		status = Wall.NotAtWall;
-		var FOV = cameraTransform.GetComponent<Camera>().fieldOfView;
-		DOTween.To(x => cameraTransform.GetComponent<Camera>().fieldOfView = x, FOV,FOV-20f,1f );
+		ZoomCamera(-20f);
 		canJump = true;
 	}
 	#endregion
