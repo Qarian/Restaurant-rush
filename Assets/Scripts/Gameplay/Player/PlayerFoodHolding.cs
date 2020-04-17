@@ -11,7 +11,7 @@ public class PlayerFoodHolding : MonoBehaviour
         public Rigidbody Rb;
         public Transform MeshTransform;
     }
-
+    
     [SerializeField] private Rigidbody playerRigidbody = default;
     [SerializeField] private List<Transform> holdingPoints = default;
 
@@ -20,10 +20,10 @@ public class PlayerFoodHolding : MonoBehaviour
     
     [Space, SerializeField] private KeyCode throwKey = KeyCode.Mouse1;
     [SerializeField] private float timeToThrowFood = 0.5f;
-    private float throwKeyHoldingTime = 0;
+    public float ThrowKeyHoldingTime { get; private set; } = 0;
     [SerializeField] private Vector2 dropVelocity = default;
     [SerializeField] private Vector2 throwVelocity = default;
-
+    public bool IsThrowing { get; private set; } = false;
     
     private readonly List<HeldFood> heldFoods = new List<HeldFood>();
 
@@ -34,17 +34,19 @@ public class PlayerFoodHolding : MonoBehaviour
         cameraSelector = GetComponent<CameraSelector>();
         
     }
+    
 
     private void Update()
     {
         if (Input.GetKeyDown(grabKey))
             GrabFood();
 
-        if (Input.GetKey(throwKey))
-            throwKeyHoldingTime += Time.deltaTime;
+        IsThrowing = Input.GetKey(throwKey);
+        if ( IsThrowing)
+            ThrowKeyHoldingTime += Time.deltaTime;
 
         if (Input.GetKeyUp(throwKey))
-            DropFood(throwKeyHoldingTime >= timeToThrowFood);
+            DropFood(ThrowKeyHoldingTime >= timeToThrowFood);
     }
 
     private void GrabFood()
@@ -97,6 +99,6 @@ public class PlayerFoodHolding : MonoBehaviour
                                  (throwFood ? throwVelocity.y : dropVelocity.y) * foodToDrop.Transform.up +
                                  (throwFood ? throwVelocity.x : dropVelocity.x) * foodToDrop.Transform.forward;
                                  
-        throwKeyHoldingTime = 0;
+        ThrowKeyHoldingTime = 0;
     }
 }
