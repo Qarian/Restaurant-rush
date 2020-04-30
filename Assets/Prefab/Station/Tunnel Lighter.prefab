@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4512679897740893460}
   m_Layer: 0
-  m_Name: Tunnel Lighter (1)
+  m_Name: Tunnel Lighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1007,7 +1007,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.86394936, b: 0.4764151, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 7
   m_SpotAngle: 130
