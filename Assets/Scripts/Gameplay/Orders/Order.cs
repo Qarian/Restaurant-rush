@@ -8,6 +8,7 @@ public class Order
     private Table table;
     private int id;
 
+    // list of customers id
     private List<int> foodLeftToEat;
 
     public Order(Color color, int id, Table table)
@@ -16,6 +17,10 @@ public class Order
         this.color = color;
         this.id = id;
         foodLeftToEat = new List<int>(table.SittingCustomers.numberOfCustomers);
+        for (int i = 0; i < table.SittingCustomers.numberOfCustomers; i++)
+        {
+            foodLeftToEat.Add(i);
+        }
 
         table.OrderSphereInteractive.SetAction(PlaceOrder);
         ColorScript.SetColor(table.OrderSphereInteractive.gameObject, color);

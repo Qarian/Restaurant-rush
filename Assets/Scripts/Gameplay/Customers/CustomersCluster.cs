@@ -64,9 +64,9 @@ public class CustomersCluster : MonoBehaviour
 		remainingPatienceTime -= Time.deltaTime;
 		if (remainingPatienceTime <= 0f)
 		{
-			LeaveRestaurant();
 			// Stop counting
 			reducePatience = false;
+			LeaveRestaurant();
 		}
 	}
 

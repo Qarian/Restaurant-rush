@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CustomersManager : MonoBehaviour
 {
     [Header("References")]
     public Transform exit = default;
-    [SerializeField] Transform tablesTransform = default;
     [SerializeField] Queue queue = default;
 
     [Header("Times (seconds)")]
@@ -24,8 +24,8 @@ public class CustomersManager : MonoBehaviour
 
     public static CustomersCluster selectedCustomers;
 
-    private List<Table> tables = new List<Table>();
-    [HideInInspector] public List<Table> freeTables = new List<Table>();
+    // Assigned in SceneGameplayWindow
+    public List<Table> freeTables = new List<Table>();
 
     private bool spawningCustomers = true;
     int acceptedCustomers = 0;
@@ -40,11 +40,10 @@ public class CustomersManager : MonoBehaviour
 
 	private void Start()
     {
-        // Load tables
-        for (int i = 0; i < tablesTransform.childCount; i++)
+        if (freeTables.Count == 0)
         {
-            tables.Add(tablesTransform.GetChild(i).GetComponent<Table>());
-            freeTables.Add(tables[i]);
+            Debug.LogError("No tables assigned!");
+            return;
         }
 
         StartCoroutine(SpawnCustomers());

@@ -1,51 +1,62 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FoodSpawner : MonoBehaviour
 {
-    private List<Transform> spawnPoints = new List<Transform>();
+    [HideInInspector]
+    public List<Transform> spawnPoints;
+    private List<Transform> freeSpawnPoints;
 
+    private Queue<Food> foodQueue = new Queue<Food>();
+    
     public static FoodSpawner Singleton;
 
     private void Start()
     {
-        foreach (Transform child in transform)
-        {
-            spawnPoints.Add(child);
-        }
-        
         if (spawnPoints.Count == 0)
             Debug.LogError("No food spawning points!", gameObject);
+        
+        freeSpawnPoints = spawnPoints;
 
         Singleton = this;
     }
 
-    public void OrderFood(Food food)
+    private void Update()
     {
-        //TODO: implement Queue
-        StartCoroutine(SpawnFood(food));
-    }
-
-    private IEnumerator SpawnFood(Food food)
-    {
-        yield return new WaitForSeconds(CustomersManager.singleton.foodSpawnTime);
-        // waiting for spawn point to be free
-        WaitForSeconds waiting = new WaitForSeconds(1);
-        while (true)
+        while (foodQueue.Count > 0)
         {
-            // TODO: check for empty places somewhere else
-            for (int i = 0; i < spawnPoints.Count; i++)
-            {
-                if (spawnPoints[i].childCount == 0)
-                {
-                    GameObject go = Instantiate(food.prefab, spawnPoints[i].position + new Vector3(0, i * 0.5f, 0), Quaternion.identity);
-                    go.transform.SetParent(spawnPoints[i]);
-                    go.GetComponent<FoodScript>().Init(food.color, food.orderId, food.customerId);
-                    yield break;
-                }
-            }
-            yield return waiting;
+            if (freeSpawnPoints.Count == 0)
+                return;
+            
+            StartCoroutine(SpawnFood(foodQueue.Dequeue(), freeSpawnPoints[0]));
         }
     }
+
+    public void OrderFood(Food food)
+    {
+        //TODO: handle clients leaving before getting food
+        foodQueue.Enqueue(food);
+    }
+
+    private IEnumerator SpawnFood(Food food, Transform spawnPoint)
+    {
+        freeSpawnPoints.Remove(spawnPoint);
+        yield return new WaitForSeconds(CustomersManager.singleton.foodSpawnTime);
+
+        GameObject go = Instantiate(food.prefab, spawnPoint.position, Quaternion.identity);
+        go.transform.SetParent(spawnPoint);
+        go.GetComponent<FoodScript>().Init(food, spawnPoint);
+    }
+
+    public void FreeSpawnPoint(Transform spawnPoint)
+    {
+        if (freeSpawnPoints.Contains(spawnPoint))
+            Debug.LogWarning("Spawn point is already free!", spawnPoint);
+        else
+            freeSpawnPoints.Add(spawnPoint);
+    }
+    
+    public void SetSpawnPoints(List<Transform> newSpawnPoints) => spawnPoints = newSpawnPoints;
 }

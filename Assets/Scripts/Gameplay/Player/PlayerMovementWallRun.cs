@@ -20,7 +20,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	[Header("Camera modification")]
 	[SerializeField] private Transform cameraTransform = default;
-	[SerializeField] private Camera camera = default;
+	[SerializeField] private new Camera camera = default;
 
 	[SerializeField] private float maxCameraRotation = 30f;
 	[SerializeField] private float rotationSpeed = 0.5f;

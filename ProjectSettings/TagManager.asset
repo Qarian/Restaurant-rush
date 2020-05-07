@@ -11,6 +11,7 @@ TagManager:
   - Light
   - UI
   - ZipLine
+  - Environment
   layers:
   - Default
   - TransparentFX

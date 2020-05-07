@@ -32,9 +32,7 @@ public class PlayerFoodHolding : MonoBehaviour
     private void Start()
     {
         cameraSelector = GetComponent<CameraSelector>();
-        
     }
-    
 
     private void Update()
     {
@@ -65,6 +63,7 @@ public class PlayerFoodHolding : MonoBehaviour
         if (!foodScript)
             return;
 
+        foodScript.TakeFood();
         HeldFood food;
         food.Transform = hitTransform;
         food.Rb = hit.rigidbody;
@@ -78,7 +77,7 @@ public class PlayerFoodHolding : MonoBehaviour
         food.MeshTransform.SetParent(holdingPoints[index]);
         // Turn off rigidbody on main object
         hitTransform.gameObject.SetActive(false);
-        //Move food to holdingPlace
+        // Move food to holdingPlace
         food.MeshTransform.DOLocalMove(Vector3.zero, foodGrabbingSpeed);
         food.MeshTransform.DOLocalRotate(Vector3.zero, foodGrabbingSpeed);
     }

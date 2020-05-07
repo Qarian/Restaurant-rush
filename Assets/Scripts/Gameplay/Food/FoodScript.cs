@@ -1,25 +1,63 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class FoodScript : Interactive
 {
 	[SerializeField] private Renderer meshRenderer = default;
 	public Transform meshTransform;
-	public Rigidbody Rigidbody { get; private set; }
-	public int OrderId { get; private set; }
-	public int CustomerId { get; private set; }
+	public Rigidbody RigidbodyComponent { get; private set; }
+	
+	private Food origin;
+	private Transform foodSpawnPoint;
+
+	public int OrderId => origin.orderId;
+	public int CustomerId => origin.customerId;
 
 	private void Awake()
 	{
-		Rigidbody = GetComponent<Rigidbody>();
+		RigidbodyComponent = GetComponent<Rigidbody>();
 		// No interaction with food - only for modifying cursor
 		SetAction(() => { });
 	}
 	
-	public void Init(Color newColor, int orderId, int customerId)
+	public void Init(Food template, Transform spawnPoint)
 	{
-		OrderId = orderId;
-		CustomerId = customerId;
-		ColorScript.SetColor(meshRenderer, newColor);
+		ColorScript.SetColor(meshRenderer, template.color);
+		origin = template;
+		foodSpawnPoint = spawnPoint;
+	}
+
+	public void TakeFood()
+	{
+		if (foodSpawnPoint)
+		{
+			FoodSpawner.Singleton.FreeSpawnPoint(foodSpawnPoint);
+			foodSpawnPoint = null;
+		}
+	}
+
+	private void OnCollisionEnter(Collision other)
+	{
+		GameObject otherGO = other.gameObject;
+		Debug.Log("food collision", otherGO);
+		Table table = otherGO.GetComponent<Table>();
+		if (!table)
+		{
+			if (otherGO.CompareTag("Environment"))
+				DestroyFood();
+		}
+	}
+
+	private void DestroyFood()
+	{
+		// TODO: make destroyed food look different
+		meshTransform.SetParent(null);
+		FoodSpawner.Singleton.OrderFood(origin);
+		DestroyedFoodManager.Singleton.AddNewDestroyedFood(meshTransform);
+		// If by accident food fall down before player takes it from its place
+		TakeFood();
+		// TODO: make more dynamic food destruction
+		Destroy(gameObject);
 	}
 }
