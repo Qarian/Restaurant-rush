@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7077528480335449645}
   m_Layer: 0
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7699,7 +7699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7077528481679344753}
   m_Layer: 0
-  m_Name: Street Lamp (1)
+  m_Name: Street Lamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7739,7 +7739,7 @@ GameObject:
   - component: {fileID: 7077528481906038655}
   m_Layer: 0
   m_Name: Light (1)
-  m_TagString: Untagged
+  m_TagString: Light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
