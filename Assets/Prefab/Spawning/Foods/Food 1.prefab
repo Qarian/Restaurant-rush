@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7716908450851806835}
   - component: {fileID: -1893230220428642448}
   m_Layer: 0
-  m_Name: Food
+  m_Name: Food 1
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,8 +78,6 @@ MonoBehaviour:
   active: 1
   meshRenderer: {fileID: 9094941308005434420}
   meshTransform: {fileID: 8509288312155961018}
-  rigidbody: {fileID: 7716908450851806835}
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2272610691958570295
 GameObject:
   m_ObjectHideFlags: 0
