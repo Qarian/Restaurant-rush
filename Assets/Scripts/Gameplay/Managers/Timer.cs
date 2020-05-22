@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class Timer : MonoBehaviour
 {
-    [Space, Tooltip("In game time in minutes")]
+    [Tooltip("In game time in minutes")]
     [SerializeField] float dayDuration = 6;
     
     [Header("UI")]
@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     private const float RotationStep = 6f;
     private Tween warningTween;
 
-    private bool isDay = false;
+    private bool isDay;
 
     public void StartDay()
     {
@@ -56,10 +56,9 @@ public class Timer : MonoBehaviour
     private void EndTime()
     {
         isDay = false;
-        Debug.Log("Time Ended!");
         warningTween.Kill();
         clockUI.face.DOColor(Color.white, warningPulseTime / 2).SetEase(Ease.Flash);
         // End day when nobody is inside
-        CustomersManager.singleton.EndTime();
+        GameManager.singleton.onTimeEnd.Invoke();
     }
 }

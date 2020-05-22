@@ -21,8 +21,8 @@ public class CameraMovement : MonoBehaviour
 		if (mouseVisible)
 			ChangeMouseMode();
 		
-		GameManager.singleton.onDayEnd.Add(OnDayEnd);
-		GameManager.singleton.onInputToggle.Add(ChangeMouseMode);
+		GameManager.singleton.onWorkEnd.AddListener(OnDayEnd);
+		GameManager.singleton.onInputToggle.AddListener(ChangeMouseMode);
 	}
 	
 	void Update()
@@ -46,7 +46,6 @@ public class CameraMovement : MonoBehaviour
 	// Toggle mouse visibility
 	private void ChangeMouseMode()
 	{
-		Debug.Log("Change mouse from " + mouseVisible.ToString());
 		if (mouseVisible)
 		{
 			Cursor.lockState = CursorLockMode.Locked;

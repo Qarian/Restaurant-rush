@@ -47,6 +47,7 @@ public class CustomersManager : MonoBehaviour
         }
 
         StartCoroutine(SpawnCustomers());
+        GameManager.singleton.onTimeEnd.AddListener(EndTime);
     }
 
     private IEnumerator SpawnCustomers()

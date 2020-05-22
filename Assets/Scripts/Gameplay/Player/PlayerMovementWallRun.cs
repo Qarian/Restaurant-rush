@@ -70,7 +70,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 		raycastLayerMask = 1 << gameObject.layer;
 		raycastLayerMask = ~raycastLayerMask;
 		
-		GameManager.singleton.onInputToggle.Add(ChangeInput);
+		GameManager.singleton.onInputToggle.AddListener(ChangeInput);
 
         singleton = this;
 	}

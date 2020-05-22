@@ -38,11 +38,8 @@ public class SceneGameplayWindow : EditorWindow
         if (tablesCount == 0)
             EditorGUILayout.HelpBox("Add tables to the scene and press button below", MessageType.Error);
         else
-        {
-            EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.IntField("Number of tables", tablesCount);
-            EditorGUI.EndDisabledGroup();
-        }
+            EditorGUILayout.LabelField("Number of tables", tablesCount.ToString());
+        
         if (GUILayout.Button("Update Tables"))
             FindTables();
         #endregion
@@ -55,11 +52,8 @@ public class SceneGameplayWindow : EditorWindow
         else if (spawnPointsCount == 0)
             EditorGUILayout.HelpBox("Add (empty) GameObjects as children to food spawner", MessageType.Error);
         else
-        {
-            EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.IntField("Number of spawn points", spawnPointsCount);
-            EditorGUI.EndDisabledGroup();
-        }
+            EditorGUILayout.LabelField("Number of spawn points", spawnPointsCount.ToString());
+        
         if (GUILayout.Button("Update spawn points"))
             FindFoodSpawnPoints(true);
         #endregion
