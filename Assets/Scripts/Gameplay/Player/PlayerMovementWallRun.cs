@@ -203,7 +203,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	private void SetWallRunning(Wall side)
 	{
-		ZoomCamera(20f);
+		//ZoomCamera(20f);
 		wallRunningCollider = raycastHit.collider;
 		status = side;
 		wallCheckDir = -raycastHit.normal;
@@ -217,12 +217,12 @@ public class PlayerMovementWallRun : MonoBehaviour
 		// TODO: Set 
 		cameraRotationTarget = maxCameraRotation * (int)side;
 	}
-
+	/*
 	private void ZoomCamera(float zoom)
 	{
 		var FOV = camera.fieldOfView;
     	DOTween.To(x => camera.fieldOfView = x, FOV,FOV+zoom,1f );
-	}
+	}*/
 
 	private bool RaycastToSide(Wall side, out RaycastHit raycastHit)
 	{
@@ -244,7 +244,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 		cameraRotationTarget = 0;
 		rb.useGravity = true;
 		status = Wall.NotAtWall;
-		ZoomCamera(-20f);
+		//ZoomCamera(-20f);
 		canJump = true;
 	}
 	#endregion
