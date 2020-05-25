@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7716908450851806835}
   - component: {fileID: -1893230220428642448}
   m_Layer: 0
-  m_Name: Food 2
+  m_Name: Food 3
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072217737263540707}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 95a25c759697eb04c924f917dd1f045d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
