@@ -114,7 +114,7 @@ public class CheatSystem : MonoBehaviour
     void GohomeCheat()
     {
         //skrypt do konca dnia
-        GameManager.singleton.EndDay();
+        GameManager.singleton.EndWork();
     }
 
     void InertiaCheat()

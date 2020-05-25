@@ -11,10 +11,22 @@ public class DestroyedFoodManager : MonoBehaviour
     private void Awake()
     {
         Singleton = this;
+        GameManager.singleton.onWorkEnd.AddListener(StartCleaning);
     }
 
     public void AddNewDestroyedFood(Transform foodTransform)
     {
         destroyedFoodTransforms.Add(foodTransform);
+    }
+
+    private void StartCleaning()
+    {
+        if (destroyedFoodTransforms.Count == 0)
+            EndCleaning();
+    }
+
+    private void EndCleaning()
+    {
+        GameManager.singleton.EndCleaning();
     }
 }

@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
 		if (mouseVisible)
 			ChangeMouseMode();
 		
-		GameManager.singleton.onWorkEnd.AddListener(OnDayEnd);
+		GameManager.singleton.onCleaningEnd.AddListener(OnDayEnd);
 		GameManager.singleton.onInputToggle.AddListener(ChangeMouseMode);
 	}
 	

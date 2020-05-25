@@ -115,7 +115,7 @@ public class CustomersManager : MonoBehaviour
     {
         acceptedCustomers--;
         if (!spawningCustomers && acceptedCustomers == 0)
-            GameManager.singleton.EndDay();
+            GameManager.singleton.EndWork();
     }
 
 	public void EndTime()
@@ -123,7 +123,7 @@ public class CustomersManager : MonoBehaviour
 		queue.CloseQueue();
         spawningCustomers = false;
         if (acceptedCustomers == 0)
-            GameManager.singleton.EndDay();
+            GameManager.singleton.EndWork();
 	}
 
     public void TakeClusterFromQueue(CustomersCluster customersCluster)

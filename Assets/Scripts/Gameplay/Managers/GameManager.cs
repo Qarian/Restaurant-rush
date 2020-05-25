@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
 	[NonSerialized] public readonly UnityEvent onTimeEnd = new UnityEvent();
 	[NonSerialized] public readonly UnityEvent onWorkEnd = new UnityEvent();
+	[NonSerialized] public readonly UnityEvent onCleaningEnd = new UnityEvent();
 	[NonSerialized] public readonly UnityEvent onInputToggle = new UnityEvent();
 
 	[SerializeField] private KeyCode toggleInputKey = KeyCode.LeftBracket;
@@ -49,12 +50,16 @@ public class GameManager : MonoBehaviour
 		    SceneManager.LoadScene(0);
     }
 
-    public void EndDay()
+    public void EndWork()
 	{
-		Debug.Log("Day ended!");
 		onWorkEnd.Invoke();
-		SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
 	}
+
+    public void EndCleaning()
+    {
+	    onCleaningEnd.Invoke();
+	    SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+    }
     
     public void RunCoroutine(IEnumerator iEnumerator)
 	{
