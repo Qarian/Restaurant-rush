@@ -3,13 +3,13 @@ using TMPro;
 
 public class PointsManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI moneyUI = default;
+    [SerializeField] ScoreUI scoreUI = default;
     
     [Space]
     [SerializeField] private int minMoneyFromCustomer = 10;
     [SerializeField] private int extraMoneyForTime = 20;
     
-    public int neededScore = 0;
+    public int requiredScore = 0;
     public static PointsManager singleton;
 
     [Space]
@@ -19,18 +19,19 @@ public class PointsManager : MonoBehaviour
     {
         singleton = this;
         score = 0;
-        moneyUI.text = score.ToString();
+        scoreUI.Enable(score, requiredScore);
+        GameManager.singleton.onWorkEnd.AddListener(scoreUI.Disable);
     }
     
     public void ChangeScore(int change)
     {
         score += change;
-        moneyUI.text = score.ToString();
+        scoreUI.UpdateScore(score);
     }
 
     public void AddPoints(int customersCount, float time)
     {
         score += Mathf.FloorToInt(customersCount * (minMoneyFromCustomer + time * extraMoneyForTime));
-        moneyUI.text = score.ToString();
+        scoreUI.UpdateScore(score);
     }
 }

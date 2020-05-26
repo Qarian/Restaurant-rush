@@ -52,11 +52,13 @@ public class GameManager : MonoBehaviour
 
     public void EndWork()
 	{
+		Debug.Log("Work ended");
 		onWorkEnd.Invoke();
 	}
 
     public void EndCleaning()
     {
+	    Debug.Log("Stopped cleaning");
 	    onCleaningEnd.Invoke();
 	    SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
     }

@@ -18,7 +18,7 @@ public class EndScreenComponent : MonoBehaviour
     {
         transform.DOMove(Vector3.zero, appearanceTime).SetEase(Ease.OutSine);
 
-        float neededScore = GameManager.singleton.PointsManager.neededScore;
+        float neededScore = GameManager.singleton.PointsManager.requiredScore;
         float score = GameManager.singleton.PointsManager.score;
 
         needed.text = neededScore.ToString();

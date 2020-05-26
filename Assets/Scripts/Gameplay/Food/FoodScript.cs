@@ -40,7 +40,6 @@ public class FoodScript : Interactive
 	private void OnCollisionEnter(Collision other)
 	{
 		GameObject otherGO = other.gameObject;
-		Debug.Log("food collision", otherGO);
 		Table table = otherGO.GetComponent<Table>();
 		if (!table)
 		{
@@ -54,7 +53,7 @@ public class FoodScript : Interactive
 		// TODO: make destroyed food look different
 		meshTransform.SetParent(null);
 		FoodSpawner.Singleton.OrderFood(origin);
-		DestroyedFoodManager.Singleton.AddNewDestroyedFood(meshTransform);
+		DroppedFoodManager.Singleton.AddNewDestroyedFood(meshTransform);
 		// If by accident food fall down before player takes it from its place
 		TakeFood();
 		// TODO: make more dynamic food destruction

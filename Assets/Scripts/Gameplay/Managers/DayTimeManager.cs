@@ -23,7 +23,6 @@ public class DayTimeManager : MonoBehaviour
 
     public void StartDay()
     {
-        Debug.Log(skyboxIntensityDay);
         RenderSettings.skybox = skyboxDay;
         RenderSettings.ambientIntensity = skyboxIntensityDay;
         
@@ -42,7 +41,6 @@ public class DayTimeManager : MonoBehaviour
 
     public void StartNight()
     {
-        Debug.Log("startNight");
         RenderSettings.skybox = skyboxNight;
         RenderSettings.ambientIntensity = skyboxIntensityNight;
         
