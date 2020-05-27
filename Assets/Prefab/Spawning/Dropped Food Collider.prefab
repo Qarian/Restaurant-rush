@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 672261300386243478}
   - component: {fileID: 5449443525986168529}
   - component: {fileID: 2568917003259747428}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Dropped Food Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

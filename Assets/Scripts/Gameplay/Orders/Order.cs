@@ -39,7 +39,7 @@ public class Order
         table.OrderSphereInteractive.gameObject.SetActive(false);
         table.TableDetector.AssignOrder(id, FoodOnTable);
 
-        DrawFood();
+        GenerateFood();
     }
 
     private void FoodOnTable(FoodScript foodScript)
@@ -64,28 +64,31 @@ public class Order
         OrdersManager.CompleteOrder(color);
         table.TableDetector.gameObject.SetActive(false);
     }
-
-
-    private void DrawFood()
+    
+    private void GenerateFood()
     {
-        //Show Icons GUI
-        table.OrderGui.ShowIcons();
         for (int i = 0; i < table.SittingCustomers.numberOfCustomers; i++)
         {
-            // Draw food
             FoodSO randomFood = OrdersManager.GetRandomFood();
-            
-            // Show food Icon
-            table.OrderGui.AddIcon(color, randomFood.icon, i);
-            
-            // Spawn food in kitchen
-            Food food = new Food();
-            food.color = color;
-            food.orderId = id;
-            food.customerId = i;
-            food.prefab = randomFood.prefab;
-            FoodSpawner.Singleton.OrderFood(food);
+            DrawFood(randomFood, i);
+            SpawnFood(randomFood, i);
         }
-        
+    }
+
+
+    private void DrawFood(FoodSO foodSO, int customerId)
+    {
+        table.OrderGui.ShowIcons();
+        table.OrderGui.AddIcon(color, foodSO.icon, customerId);
+    }
+
+    private void SpawnFood(FoodSO foodSO, int customerId)
+    {
+        Food food = new Food();
+        food.color = color;
+        food.orderId = id;
+        food.customerId = customerId;
+        food.prefab = foodSO.prefab;
+        FoodSpawner.Singleton.OrderFood(food);
     }
 }

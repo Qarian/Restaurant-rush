@@ -4,7 +4,6 @@
 public class DroppedFood : MonoBehaviour
 {
     private Interactive interactive;
-    private DroppedFoodManager droppedFoodManager;
 
     private void Start()
     {
@@ -12,16 +11,15 @@ public class DroppedFood : MonoBehaviour
         interactive.active = false;
     }
 
-    public void Activate(DroppedFoodManager manager)
+    public void Activate()
     {
-        droppedFoodManager = manager;
         interactive.SetAction(CleanDroppedItem);
         interactive.active = true;
     }
 
     private void CleanDroppedItem()
     {
-        droppedFoodManager.RemoveDroppedFood(this);
+        DroppedFoodManager.Singleton.RemoveDroppedFood(this);
         Destroy(transform.parent.gameObject);
     }
 }

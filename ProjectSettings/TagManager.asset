@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Food
-  - Enviroment
   - Table
   - Queue
   - Light
@@ -24,7 +23,7 @@ TagManager:
   - PostProcessing
   - Customer
   - Player
-  - 
+  - OnlyInteractive
   - 
   - 
   - 

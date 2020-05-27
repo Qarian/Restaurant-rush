@@ -15,7 +15,7 @@ public class CleaningUI : MonoBehaviour
     {
         if (text == null)
             text = filthCountText.text;
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
         UpdateFilthCount(filthCount);
     }
 
