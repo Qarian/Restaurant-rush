@@ -282,6 +282,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: End Day Screen
       objectReference: {fileID: 0}
+    - target: {fileID: 1820197815034359817, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820197815034359817, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820197815034359817, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820197815034359817, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177604813615828779, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177604813615828779, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177604813615828779, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5177604813615828779, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5847677677943166683, guid: 64d332c9be8c8fe4cbd78cc014b3809a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -444,6 +484,7 @@ GameObject:
   - component: {fileID: 4006350634978402046}
   - component: {fileID: 4006350634978402047}
   - component: {fileID: 4006350634978402040}
+  - component: {fileID: 4006350634978402043}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -451,6 +492,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4006350634978402043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006350634978402042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3773eada0f4e98f4998feb3eab65601c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!223 &4006350634978402046
 Canvas:
   m_ObjectHideFlags: 0
