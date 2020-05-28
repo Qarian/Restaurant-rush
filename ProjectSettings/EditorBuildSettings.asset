@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Dorian Scene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/Main Menu.unity
+    guid: 8dcced52a5ad61f40a6c9a6fb057c35e
   - enabled: 1
     path: Assets/Scenes/End Screen.unity
     guid: 59f9aed0bbe501e4da1e7f574ecaadaf
