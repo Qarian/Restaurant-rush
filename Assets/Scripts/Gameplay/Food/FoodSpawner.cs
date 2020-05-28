@@ -10,6 +10,7 @@ public class FoodSpawner : MonoBehaviour
     private List<Transform> freeSpawnPoints;
 
     private Queue<Food> foodQueue = new Queue<Food>();
+    public readonly List<Food> foodToRemove = new List<Food>();
     
     public static FoodSpawner Singleton;
 
@@ -30,7 +31,11 @@ public class FoodSpawner : MonoBehaviour
             if (freeSpawnPoints.Count == 0)
                 return;
             
-            StartCoroutine(SpawnFood(foodQueue.Dequeue(), freeSpawnPoints[0]));
+            Food foodToPrepare = foodQueue.Dequeue();
+            if (foodToRemove.Contains(foodToPrepare))
+                foodToRemove.Remove(foodToPrepare);
+            else
+                StartCoroutine(SpawnFood(foodToPrepare, freeSpawnPoints[0]));
         }
     }
 

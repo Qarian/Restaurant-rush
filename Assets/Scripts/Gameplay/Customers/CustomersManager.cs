@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class CustomersManager : MonoBehaviour
 {
@@ -18,9 +17,6 @@ public class CustomersManager : MonoBehaviour
     [Header("Patience (seconds)")]
     public float queuePatienceTime = 25f;
     public float tablePatienceTime = 40f;
-
-    [Header("Points")]
-    public int pointsFromTable = 10;
 
     public static CustomersCluster selectedCustomers;
 

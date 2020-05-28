@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6736953220705234899}
   - component: {fileID: 7872714210075255107}
   - component: {fileID: 3260333437549312407}
+  - component: {fileID: 7479438890457598244}
   m_Layer: 0
   m_Name: Game Managers
   m_TagString: Untagged
@@ -70,7 +71,6 @@ MonoBehaviour:
   customersEatingTime: 5
   queuePatienceTime: 25
   tablePatienceTime: 40
-  pointsFromTable: 10
   freeTables: []
 --- !u!114 &3322131621354815472
 MonoBehaviour:
@@ -115,10 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b72e3fc538d1045932a21fbfb75f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyUI: {fileID: 0}
+  scoreUI: {fileID: 0}
   minMoneyFromCustomer: 10
   extraMoneyForTime: 20
-  neededScore: 0
+  requiredScore: 0
   score: 0
 --- !u!114 &7872714210075255107
 MonoBehaviour:
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
+  droppedFoodColliderPrefab: {fileID: 0}
 --- !u!114 &3260333437549312407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +154,16 @@ MonoBehaviour:
   skyboxIntensityNight: 0
   enabledAtDay: []
   enabledAtNight: []
+--- !u!114 &7479438890457598244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995626857611216456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78bbbe305cbb12469b94f08be640057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputKey: 27

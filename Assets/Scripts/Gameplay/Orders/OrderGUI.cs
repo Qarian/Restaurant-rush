@@ -64,7 +64,6 @@ public class OrderGUI : MonoBehaviour
     }
     
     
-    
     public void ShowIcons()
     {
         gameObject.SetActive(true);
@@ -76,6 +75,7 @@ public class OrderGUI : MonoBehaviour
         {
             if (takenImages[i])
                 images[i].gameObject.SetActive(false);
+            takenImages[i] = false;
         }
         gameObject.SetActive(false);
     }

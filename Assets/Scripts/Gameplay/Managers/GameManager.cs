@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
 	[NonSerialized] public readonly UnityEvent onCleaningEnd = new UnityEvent();
 	[NonSerialized] public readonly UnityEvent onInputToggle = new UnityEvent();
 
-	[SerializeField] private KeyCode toggleInputKey = KeyCode.LeftBracket;
-
 	public PointsManager PointsManager { get; private set; }
 	
 	public static GameManager singleton;
@@ -38,18 +36,6 @@ public class GameManager : MonoBehaviour
 	    GetComponent<Timer>().StartDay();
     }
 
-    private void Update()
-    {
-	    if (Input.GetKeyDown(KeyCode.Escape))
-		    SceneManager.LoadScene(0);
-
-	    if (Input.GetKeyDown(toggleInputKey))
-		    onInputToggle.Invoke();
-
-	    if (Input.GetKeyDown(KeyCode.Escape))
-		    SceneManager.LoadScene(0);
-    }
-
     public void EndWork()
 	{
 		Debug.Log("Work ended");
@@ -61,6 +47,11 @@ public class GameManager : MonoBehaviour
 	    Debug.Log("Stopped cleaning");
 	    onCleaningEnd.Invoke();
 	    SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+    }
+
+    public void GoToMainMenu()
+    {
+	    SceneManager.LoadScene(0);
     }
     
     public void RunCoroutine(IEnumerator iEnumerator)

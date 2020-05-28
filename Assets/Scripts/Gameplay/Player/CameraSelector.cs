@@ -32,7 +32,7 @@ public class CameraSelector : MonoBehaviour
 			// Hit something with Interactive component
 			if (currentInteractive && currentInteractive.active)
 			{
-				if (Input.GetKeyDown(KeyCode.E))
+				if (Input.GetKeyDown(KeyCode.E) && !Pause.Paused)
 					currentInteractive.Interaction();
 				size += 2 * crosshairChangeSpeed * Time.deltaTime;
 			}

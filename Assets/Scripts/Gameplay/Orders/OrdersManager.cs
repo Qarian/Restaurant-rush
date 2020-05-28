@@ -11,18 +11,14 @@ public class OrdersManager : MonoBehaviour
 
     private static int lastOrderId = 0;
 
-    public static int ActiveOrders { get; private set; }
-
     private void Start()
     {
         colors = new List<Color>(colorScheme.colors.ToArray());
-        ActiveOrders = 0;
         FoodList = foodList;
     }
 
     public static Order NewOrder(Table table)
     {
-        ActiveOrders++;
         lastOrderId++;
 
         Color color;
@@ -43,7 +39,6 @@ public class OrdersManager : MonoBehaviour
     public static void CompleteOrder(Color color)
     {
         colors.Add(color);
-        ActiveOrders--;
     }
 
     public static FoodSO GetRandomFood()

@@ -23,55 +23,54 @@ public class CheatSystem : MonoBehaviour
 
     public void CheatField()
     {
-        
-            cheat = inputField.GetComponent<Text>().text;
+        cheat = inputField.GetComponent<Text>().text;
 
-            switch (cheat)
-            {
-                case "grandma":
-                    Debug.Log("Cheat activated: add money");
-                    GrandmaCheat();
-                    break;
+        switch (cheat)
+        {
+            case "grandma":
+                Debug.Log("Cheat activated: add money");
+                GrandmaCheat();
+                break;
 
-                case "holidays":
-                    Debug.Log("Cheat activated: more time");
-                    HolidaysCheat();
-                    break;
+            case "holidays":
+                Debug.Log("Cheat activated: more time");
+                HolidaysCheat();
+                break;
 
-                case "chincha":
-                    Debug.Log("Cheat activated: spawned chinchilla Julian");
-                    SzyszaCheat();
-                    break;
+            case "chincha":
+                Debug.Log("Cheat activated: spawned chinchilla Julian");
+                SzyszaCheat();
+                break;
 
-                case "flyhigh":
-                    Debug.Log("Cheat activated: platforms won't fall");
-                    FlyhighCheat();
-                    break;
+            case "flyhigh":
+                Debug.Log("Cheat activated: platforms won't fall");
+                FlyhighCheat();
+                break;
 
-                case "runboyrun":
-                    Debug.Log("Cheat activated: max speed");
-                    RunboyrunCheat();
-                    break;
+            case "runboyrun":
+                Debug.Log("Cheat activated: max speed");
+                RunboyrunCheat();
+                break;
 
-                case "ilovebunny":
-                    Debug.Log("Cheat activated: higher jumps");
-                    IlovebunnyCheat();
-                    break;
+            case "ilovebunny":
+                Debug.Log("Cheat activated: higher jumps");
+                IlovebunnyCheat();
+                break;
 
-                case "gohome":
-                    Debug.Log("Cheat activated: day ended");
-                    GohomeCheat();
-                    break;
+            case "gohome":
+                Debug.Log("Cheat activated: day ended");
+                GohomeCheat();
+                break;
 
-                case "wuhan":
-                    Debug.Log("To nawet nie jest smieszne...");
-                    break;
+            case "wuhan":
+                Debug.Log("To nawet nie jest smieszne...");
+                break;
 
-                case "inertia":
-                    Debug.Log("Cheat activated: no gravity");
-                    InertiaCheat();
-                    break;
-            }
+            case "inertia":
+                Debug.Log("Cheat activated: no gravity");
+                InertiaCheat();
+                break;
+        }
 
     }
     void GrandmaCheat()
@@ -126,11 +125,10 @@ public class CheatSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.RightShift))
+        /*if (Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.RightShift))
         {
             search.SetActive(!search.activeSelf);
             CheatField();
-        }
-            
+        }*/
     }
 }

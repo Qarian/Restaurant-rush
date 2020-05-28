@@ -36,6 +36,8 @@ public class PlayerFoodHolding : MonoBehaviour
 
     private void Update()
     {
+        if (Pause.Paused) return;
+        
         if (Input.GetKeyDown(grabKey))
             GrabFood();
 

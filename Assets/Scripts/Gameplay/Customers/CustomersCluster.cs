@@ -40,7 +40,6 @@ public class CustomersCluster : MonoBehaviour
 		}
 
 		// Create customers
-		// TODO: Pooling
 		customers = new Customer[numberOfCustomers];
 		for (int i = 0; i < numberOfCustomers; i++)
 		{
@@ -109,7 +108,6 @@ public class CustomersCluster : MonoBehaviour
 		{
 			customers[i].GoToTable(table.chairPositions.GetChild(i));
 		}
-		//transform.position = table.transform.position;
 	}
 
 	public void CustomerArrivedAtTable()
@@ -135,9 +133,11 @@ public class CustomersCluster : MonoBehaviour
 
     public void LeaveRestaurant()
     {
+	    // In Queue
 		if (orderInQueue != -1)
 			CustomersManager.singleton.TakeClusterFromQueue(this);
-
+		
+		// At table
 		if (assignedTable)
 		{
 			assignedTable.ResetTable();
@@ -157,12 +157,13 @@ public class CustomersCluster : MonoBehaviour
             Destroy(customers[i].gameObject);
         }
 		CustomersManager.singleton.RemoveCluster();
+		Destroy(gameObject);
     }
 
     private Customer InstantiateCustomer(Vector3 position)
     {
-        //TODO: Pooling
-        GameObject newCustomer = Instantiate(customerPrefab, position, Quaternion.identity, GameManager.singleton.transform);
+        //TODO: Pooling for customers
+        GameObject newCustomer = Instantiate(customerPrefab, position, Quaternion.identity, null);
         return newCustomer.GetComponent<Customer>();
     }
 }

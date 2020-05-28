@@ -38,9 +38,6 @@ public class CameraMovement : MonoBehaviour
 			Vector3 currentRotation = transform.localEulerAngles;
 			transform.localEulerAngles = new Vector3(-rotationY, currentRotation.y, currentRotation.z);
 		}
-		
-		if (Input.GetKeyDown(KeyCode.L))
-			ChangeMouseMode();
 	}
 
 	// Toggle mouse visibility

@@ -13,6 +13,7 @@ public class FoodScript : Interactive
 
 	public int OrderId => origin.orderId;
 	public int CustomerId => origin.customerId;
+	public Food Origin => origin;
 
 	private void Awake()
 	{

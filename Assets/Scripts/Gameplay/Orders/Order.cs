@@ -9,18 +9,14 @@ public class Order
     private int id;
 
     // list of customers id
-    private List<int> foodLeftToEat;
+    private List<Food> foodLeftToEat;
 
     public Order(Color color, int id, Table table)
     {
         this.table = table;
         this.color = color;
         this.id = id;
-        foodLeftToEat = new List<int>(table.SittingCustomers.numberOfCustomers);
-        for (int i = 0; i < table.SittingCustomers.numberOfCustomers; i++)
-        {
-            foodLeftToEat.Add(i);
-        }
+        foodLeftToEat = new List<Food>(table.SittingCustomers.numberOfCustomers);
 
         table.OrderSphereInteractive.SetAction(PlaceOrder);
         ColorScript.SetColor(table.OrderSphereInteractive.gameObject, color);
@@ -44,7 +40,7 @@ public class Order
 
     private void FoodOnTable(FoodScript foodScript)
     {
-        foodLeftToEat.Remove(foodScript.CustomerId);
+        foodLeftToEat.Remove(foodScript.Origin);
         table.OrderGui.RemoveImage(foodScript.CustomerId);
         
         if (foodLeftToEat.Count <= 0)
@@ -63,32 +59,45 @@ public class Order
     {
         OrdersManager.CompleteOrder(color);
         table.TableDetector.gameObject.SetActive(false);
+        table.OrderGui.HideIcons();
+        for (int i = 0; i < foodLeftToEat.Count; i++)
+        {
+            FoodSpawner.Singleton.foodToRemove.Add(foodLeftToEat[i]);
+        }
     }
+    
     
     private void GenerateFood()
     {
         for (int i = 0; i < table.SittingCustomers.numberOfCustomers; i++)
         {
-            FoodSO randomFood = OrdersManager.GetRandomFood();
-            DrawFood(randomFood, i);
-            SpawnFood(randomFood, i);
+            FoodSO randomFoodSO = OrdersManager.GetRandomFood();
+            Food food = MakeFoodObject(randomFoodSO, i);
+            
+            DrawFood(randomFoodSO, i);
+            SpawnFood(food);
+            foodLeftToEat.Add(food);
         }
     }
-
-
-    private void DrawFood(FoodSO foodSO, int customerId)
-    {
-        table.OrderGui.ShowIcons();
-        table.OrderGui.AddIcon(color, foodSO.icon, customerId);
-    }
-
-    private void SpawnFood(FoodSO foodSO, int customerId)
+    
+    private Food MakeFoodObject(FoodSO foodSO, int customerId)
     {
         Food food = new Food();
         food.color = color;
         food.orderId = id;
         food.customerId = customerId;
         food.prefab = foodSO.prefab;
+        return food;
+    }
+    
+    private void DrawFood(FoodSO foodSO, int customerId)
+    {
+        table.OrderGui.ShowIcons();
+        table.OrderGui.AddIcon(color, foodSO.icon, customerId);
+    }
+
+    private void SpawnFood(Food food)
+    {
         FoodSpawner.Singleton.OrderFood(food);
     }
 }

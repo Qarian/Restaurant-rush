@@ -77,6 +77,8 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	private void Update()
 	{
+		if (Pause.Paused) return;
+		
 		CheckInput();
 	}
 	
@@ -283,7 +285,6 @@ public class PlayerMovementWallRun : MonoBehaviour
 	
 	private void ChangeInput()
 	{
-		Debug.Log("player input");
 		registerInput = !registerInput;
 	}
 }
