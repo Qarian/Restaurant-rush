@@ -156,7 +156,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 		// Start Wall running
 		if (status == Wall.NotAtWall)
 		{
-			if (Input.GetKey(jumpKey) && !onGround && (Time.time - leftWallTime) >= wallJumpTime)
+			if (Input.GetKeyDown(jumpKey) && !onGround && (Time.time - leftWallTime) >= wallJumpTime)
 				CheckForWall();
 			return;
 		}
@@ -265,9 +265,13 @@ public class PlayerMovementWallRun : MonoBehaviour
     {
         if (!onGround)
             canJump = false;
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+        
+        Vector3 velocity = rb.velocity;
+        velocity = new Vector3(velocity.x, jumpForce, velocity.z);
+        rb.velocity = velocity;
+        
         if (fromWall)
-            rb.AddForce(wallCheckDir * jumpOfWallForce * -1f, ForceMode.VelocityChange);
+	        rb.AddForce(wallCheckDir * jumpOfWallForce * -1f, ForceMode.VelocityChange);
     }
 
 	private void CheckGround()

@@ -24,7 +24,7 @@ public class CustomersManager : MonoBehaviour
     public List<Table> freeTables = new List<Table>();
 
     private bool spawningCustomers;
-    int acceptedCustomers;
+    int customersInside;
 
 	#region singleton
 	public static CustomersManager singleton;
@@ -36,6 +36,7 @@ public class CustomersManager : MonoBehaviour
 
 	private void Start()
     {
+        selectedCustomers = null;
         if (freeTables.Count == 0)
         {
             Debug.LogError("No tables assigned!");
@@ -43,7 +44,8 @@ public class CustomersManager : MonoBehaviour
         }
 
         spawningCustomers = true;
-        acceptedCustomers = 0;
+        customersInside = 0;
+        Debug.Log("Spawn customers");
         StartCoroutine(SpawnCustomers());
         GameManager.singleton.onTimeEnd.AddListener(EndTime);
     }
@@ -53,6 +55,7 @@ public class CustomersManager : MonoBehaviour
         while (spawningCustomers)
         {
             queue.GenerateNewCluster();
+            customersInside++;
             yield return new WaitForSeconds(newCustomerTime);
         }
     }
@@ -79,7 +82,6 @@ public class CustomersManager : MonoBehaviour
         selectedCustomers.AssignToTable(table);
         freeTables.Remove(table);
         // Increase number of custer clusters inside building
-        acceptedCustomers++;
         TakeClusterFromQueue(selectedCustomers);
         // clear selection
         selectedCustomers = null;
@@ -111,8 +113,8 @@ public class CustomersManager : MonoBehaviour
 
     public void RemoveCluster()
     {
-        acceptedCustomers--;
-        if (!spawningCustomers && acceptedCustomers == 0)
+        customersInside--;
+        if (!spawningCustomers && customersInside == 0)
             GameManager.singleton.EndWork();
     }
 
@@ -120,7 +122,7 @@ public class CustomersManager : MonoBehaviour
 	{
 		queue.CloseQueue();
         spawningCustomers = false;
-        if (acceptedCustomers == 0)
+        if (customersInside == 0)
             GameManager.singleton.EndWork();
 	}
 

@@ -20,7 +20,7 @@ public class FoodSpawner : MonoBehaviour
             Debug.LogError("No food spawning points!", gameObject);
         
         freeSpawnPoints = spawnPoints;
-
+        
         Singleton = this;
     }
 
@@ -41,7 +41,6 @@ public class FoodSpawner : MonoBehaviour
 
     public void OrderFood(Food food)
     {
-        //TODO: handle clients leaving before getting food
         foodQueue.Enqueue(food);
     }
 
@@ -50,9 +49,17 @@ public class FoodSpawner : MonoBehaviour
         freeSpawnPoints.Remove(spawnPoint);
         yield return new WaitForSeconds(CustomersManager.singleton.foodSpawnTime);
 
-        GameObject go = Instantiate(food.prefab, spawnPoint.position, Quaternion.identity);
-        go.transform.SetParent(spawnPoint);
-        go.GetComponent<FoodScript>().Init(food, spawnPoint);
+        if (foodToRemove.Contains(food))
+        {
+            foodToRemove.Remove(food);
+            freeSpawnPoints.Add(spawnPoint);
+        }
+        else
+        {
+            GameObject go = Instantiate(food.prefab, spawnPoint.position, Quaternion.identity);
+            go.transform.SetParent(spawnPoint);
+            go.GetComponent<FoodScript>().Init(food, spawnPoint);
+        }
     }
 
     public void FreeSpawnPoint(Transform spawnPoint)

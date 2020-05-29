@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     [Header("UI")]
     [SerializeField] private ClockUI clockUI = default;
     [SerializeField] float timeToWarning = 5.5f;
-    [SerializeField] private float warningPulseTime = 0.5f;
+    [SerializeField] private float warningPulseInterval = 0.5f;
     [SerializeField] private float rotation = 270f;
     private WaitForSeconds rotateTime;
     private const float RotationStep = 6f;
@@ -38,7 +38,7 @@ public class Timer : MonoBehaviour
     private IEnumerator ClockUIWarning()
     {
         yield return new WaitForSeconds(timeToWarning * 60);
-        warningTween = clockUI.face.DOColor(Color.red, warningPulseTime)
+        warningTween = clockUI.face.DOColor(Color.red, warningPulseInterval)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.Flash)
             .Play();
@@ -57,7 +57,7 @@ public class Timer : MonoBehaviour
     {
         isDay = false;
         warningTween.Kill();
-        clockUI.face.DOColor(Color.white, warningPulseTime / 2).SetEase(Ease.Flash);
+        clockUI.face.DOColor(Color.white, warningPulseInterval / 2).SetEase(Ease.Flash);
         // End day when nobody is inside
         GameManager.singleton.onTimeEnd.Invoke();
     }

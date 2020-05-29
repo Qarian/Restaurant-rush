@@ -94,7 +94,7 @@ public class CheatSystem : MonoBehaviour
     void FlyhighCheat()
     {
         //skrypt do platform
-        FallingPlatformSKS.jumpToFallPlatformStatic = 10000;
+        //FallingPlatformSKS.jumpToFallPlatformStatic = 10000;
     }
 
     void RunboyrunCheat()

@@ -28,6 +28,7 @@ public class EndScreenComponent : MonoBehaviour
         profit.text = (score - neededScore).ToString();
         // TODO Saving Bank
         bank.text = profit.text;
+        Destroy(GameManager.singleton.gameObject);
     }
 
     public void NextStage()

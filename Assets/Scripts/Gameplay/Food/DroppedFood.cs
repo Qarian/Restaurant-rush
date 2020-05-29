@@ -7,12 +7,17 @@ public class DroppedFood : MonoBehaviour
 
     private void Start()
     {
-        interactive = GetComponent<Interactive>();
-        interactive.active = false;
+        if (interactive == null)
+        {
+            interactive = GetComponent<Interactive>();
+            interactive.active = false;
+        }
     }
 
     public void Activate()
     {
+        if (interactive == null)
+            interactive = GetComponent<Interactive>();
         interactive.SetAction(CleanDroppedItem);
         interactive.active = true;
     }

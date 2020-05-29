@@ -62,5 +62,6 @@ public class Queue : MonoBehaviour
 	        cluster.LeaveRestaurant();
         }
         barrier.SetActive(true);
+        queuePositions = null;
     }
 }
