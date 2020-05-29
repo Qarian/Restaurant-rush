@@ -23,8 +23,8 @@ public class CustomersManager : MonoBehaviour
     // Assigned in SceneGameplayWindow
     public List<Table> freeTables = new List<Table>();
 
-    private bool spawningCustomers = true;
-    int acceptedCustomers = 0;
+    private bool spawningCustomers;
+    int acceptedCustomers;
 
 	#region singleton
 	public static CustomersManager singleton;
@@ -42,6 +42,8 @@ public class CustomersManager : MonoBehaviour
             return;
         }
 
+        spawningCustomers = true;
+        acceptedCustomers = 0;
         StartCoroutine(SpawnCustomers());
         GameManager.singleton.onTimeEnd.AddListener(EndTime);
     }

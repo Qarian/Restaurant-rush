@@ -96,13 +96,13 @@ public class PlayerMovementWallRun : MonoBehaviour
 	private void UpdateCamera()
 	{
 		// Rotate camera
-        		float offset = 0f;
-        		Vector3 cameraRotation = cameraTransform.localRotation.eulerAngles;
-        		currentCameraRotation = Mathf.Lerp(currentCameraRotation, cameraRotationTarget, Time.deltaTime * rotationSpeed);
-        		if(status != Wall.NotAtWall && moveAxis != Vector3.zero)
-        			 offset = Random.Range(-0.25f, 0.25f);
-        		cameraRotation.z = currentCameraRotation+offset;
-        		cameraTransform.localRotation = Quaternion.Euler(cameraRotation);
+        float offset = 0f;
+        Vector3 cameraRotation = cameraTransform.localRotation.eulerAngles;
+        currentCameraRotation = Mathf.Lerp(currentCameraRotation, cameraRotationTarget, Time.deltaTime * rotationSpeed);
+        if(status != Wall.NotAtWall && moveAxis != Vector3.zero)
+        	 offset = Random.Range(-0.25f, 0.25f);
+        cameraRotation.z = currentCameraRotation+offset;
+        cameraTransform.localRotation = Quaternion.Euler(cameraRotation);
 	}
 
 	private void CheckInput()

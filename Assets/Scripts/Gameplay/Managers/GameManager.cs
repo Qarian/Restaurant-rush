@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void GoToMainMenu()
     {
 	    SceneManager.LoadScene(0);
+	    Destroy(gameObject);
     }
     
     public void RunCoroutine(IEnumerator iEnumerator)

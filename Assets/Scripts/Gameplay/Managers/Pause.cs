@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Pause : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Pause : MonoBehaviour
     private void Start()
     {
         Paused = false;
-        GameManager.singleton.onCleaningEnd.AddListener(() => enabled = false);
+        GameManager.singleton.onCleaningEnd.AddListener(StopPausing);
         pauseMenu.SetActive(false);
     }
 
@@ -26,5 +27,17 @@ public class Pause : MonoBehaviour
         Time.timeScale = Paused ? 0 : 1;
         GameManager.singleton.onInputToggle.Invoke();
         pauseMenu.SetActive(Paused);
+    }
+
+    private void StopPausing()
+    {
+        enabled = false;
+        Paused = false;
+        Time.timeScale = 1;
+    }
+
+    private void OnDestroy()
+    {
+        StopPausing();
     }
 }
