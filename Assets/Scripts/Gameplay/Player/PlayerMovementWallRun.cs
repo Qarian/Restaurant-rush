@@ -9,8 +9,11 @@ public class PlayerMovementWallRun : MonoBehaviour
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
     [Space]
-	public float accelaration = 10f;
+	public float wallRunningAccelaration = 10f;
+	public float groundAcceleration = 10f;
 	public float maxSpeed = 10f;
+	[SerializeField, Range(0, 1), Tooltip("Determines how much player slides on ground")]
+	public float slideFactor = 0.25f;
 	[SerializeField, Range(0, 1), Tooltip("0 - no vertical movement while wall running,\n1 - no change")]
 	private float verticalSpeedModifierWallRunning = 0.85f;
 
@@ -125,7 +128,7 @@ public class PlayerMovementWallRun : MonoBehaviour
 	Vector3  SetWallVelocity(Vector3 speed)
 	{
 		speed.y *= verticalSpeedModifierWallRunning * Time.fixedDeltaTime;
-		speed += (wallDir * accelaration * Time.fixedDeltaTime);
+		speed += (wallDir * wallRunningAccelaration * Time.fixedDeltaTime);
 
 		// Smooth going through acute angles
 		float velocityChange = lastVelocity.magnitude / speed.magnitude;
@@ -140,13 +143,20 @@ public class PlayerMovementWallRun : MonoBehaviour
 
 	Vector3  SetGroundVelocity()
 	{
+		Vector3 velocity = rb.velocity;
 		Vector3 speedGain = Vector3.zero;
 		speedGain += moveAxis.z * playerTransform.forward;
 		speedGain += moveAxis.x * playerTransform.right;
 		speedGain = Vector3.ProjectOnPlane(speedGain.normalized, groundNormalVector);
-		speedGain = speedGain.normalized * (accelaration * Time.fixedDeltaTime);
+		speedGain = speedGain.normalized * (groundAcceleration * Time.fixedDeltaTime);
 		speedGain = new Vector3(speedGain.x, speedGain.y * 2f, speedGain.z);
-		return Vector3.ClampMagnitude(rb.velocity + speedGain, maxSpeed);
+		
+		Vector2 speedPlane = new Vector2(speedGain.x, speedGain.z);
+		speedPlane.x += velocity.x * slideFactor;
+		speedPlane.y += velocity.z * slideFactor;
+		speedPlane = Vector2.ClampMagnitude(speedPlane, maxSpeed);
+		
+		return new Vector3(speedPlane.x, velocity.y, speedPlane.y);
 	}
 
 	

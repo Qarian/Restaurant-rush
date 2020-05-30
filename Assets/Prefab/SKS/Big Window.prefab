@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 1489820454985390781}
   - component: {fileID: 1489820454985390753}
   - component: {fileID: 1489820454985390752}
-  - component: {fileID: 1489820454985390755}
   - component: {fileID: 1489820454985390754}
   m_Layer: 0
   m_Name: Glass
@@ -113,20 +112,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1489820454985390755
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489820454985390780}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!215 &1489820454985390754
 ReflectionProbe:
   m_ObjectHideFlags: 0
@@ -172,7 +157,6 @@ GameObject:
   - component: {fileID: 3084731657794348146}
   - component: {fileID: 7647323937333844556}
   - component: {fileID: 6693614937975097544}
-  - component: {fileID: 939335231296813565}
   m_Layer: 0
   m_Name: Frame
   m_TagString: Untagged
@@ -2868,17 +2852,3 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!64 &939335231296813565
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8437349673555875396}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}

@@ -54,8 +54,8 @@ public class CustomersManager : MonoBehaviour
     {
         while (spawningCustomers)
         {
-            queue.GenerateNewCluster();
-            customersInside++;
+            if (queue.GenerateNewCluster())
+                customersInside++;
             yield return new WaitForSeconds(newCustomerTime);
         }
     }
@@ -114,7 +114,7 @@ public class CustomersManager : MonoBehaviour
     public void RemoveCluster()
     {
         customersInside--;
-        if (!spawningCustomers && customersInside == 0)
+        if (!spawningCustomers && customersInside <= 0)
             GameManager.singleton.EndWork();
     }
 

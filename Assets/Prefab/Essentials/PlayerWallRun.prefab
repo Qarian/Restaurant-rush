@@ -422,10 +422,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundChecker: {fileID: 1676825077}
   jumpKey: 32
-  accelaration: 10
-  maxSpeed: 10
-  verticalSpeedModifierWallRunning: 0.85
-  jumpForce: 6
+  wallRunningAccelaration: 10
+  groundAcceleration: 40
+  maxSpeed: 8
+  slideFactor: 0.9
+  verticalSpeedModifierWallRunning: 0.4
+  jumpForce: 11
   jumpOfWallForce: 4
   wallJumpTime: 0.5
   cameraTransform: {fileID: 4676869844206712760}

@@ -41,7 +41,7 @@ public class PlayerFoodHolding : MonoBehaviour
         if (Input.GetKeyDown(grabKey))
             GrabFood();
 
-        IsThrowing = Input.GetKey(throwKey);
+        IsThrowing = Input.GetKey(throwKey) && heldFoods.Count > 0;
         if ( IsThrowing)
             ThrowKeyHoldingTime += Time.deltaTime;
 

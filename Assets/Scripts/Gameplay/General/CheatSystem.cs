@@ -11,9 +11,9 @@ public class CheatSystem : MonoBehaviour
     [SerializeField] private GameObject cheatsUI = default;
     private GameObject search;
     [SerializeField] private int cheatMoney = 100;
-    [SerializeField] private float cheatAccelerationMultiplier = 2;
+    //[SerializeField] private float cheatAccelerationMultiplier = 2;
     [SerializeField] private float cheatJumpForceMultiplier = 2;
-    [SerializeField] private float cheatMaxSpeedMultiplier = 2;
+    //[SerializeField] private float cheatMaxSpeedMultiplier = 2;
 
     void Start()
     {
@@ -100,8 +100,8 @@ public class CheatSystem : MonoBehaviour
     void RunboyrunCheat()
     {
         //skrypt do biegu
-        PlayerMovementWallRun.singleton.accelaration *= cheatAccelerationMultiplier;
-        PlayerMovementWallRun.singleton.maxSpeed *= cheatMaxSpeedMultiplier;
+        //PlayerMovementWallRun.singleton.groundSpeed *= cheatAccelerationMultiplier;
+        //PlayerMovementWallRun.singleton.maxSpeed *= cheatMaxSpeedMultiplier;
     }
 
     void IlovebunnyCheat()
