@@ -19,7 +19,7 @@ public class CustomersCluster : MonoBehaviour
 	private float maxPatienceTime;
 
 	// Instantiate new cluster of customers
-	public void Create(int numberOfCustomers, int order)
+	public void Create(int numberOfCustomers, int order, Vector3 targetPos)
 	{
 		// clear values (in case of pooling)
 		customersAtTable = 0;
@@ -48,7 +48,7 @@ public class CustomersCluster : MonoBehaviour
 		}
 
 		// Move Customers to their place in queue
-		transform.position = Queue.queuePositions[order];
+		transform.position = targetPos;
 		for (int i = 0; i < numberOfCustomers; i++)
 		{
 			customers[i].SetDestination(customersTransforms[i]);
@@ -70,12 +70,12 @@ public class CustomersCluster : MonoBehaviour
 	}
 
 	// Move cluster to next position in queue
-	public void MoveClusterInQueue()
+	public void MoveClusterInQueue(Vector3 targetPos)
 	{
 		orderInQueue--;
 		if (orderInQueue >= 0)
 		{
-			transform.position = Queue.queuePositions[orderInQueue];
+			transform.position = targetPos;
 			for (int i = 0; i < numberOfCustomers; i++)
 			{
 				customers[i].SetDestination(customersTransforms[i]);

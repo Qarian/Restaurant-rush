@@ -54,7 +54,7 @@ public class CustomersManager : MonoBehaviour
     {
         while (spawningCustomers)
         {
-            if (queue.GenerateNewCluster())
+            if (QueueManager.SpawnNewCustomers())
                 customersInside++;
             yield return new WaitForSeconds(newCustomerTime);
         }
