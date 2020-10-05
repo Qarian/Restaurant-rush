@@ -19,7 +19,7 @@ public class Queue : MonoBehaviour
 		barrier?.SetActive(false);
 		QueueManager.AddQueue(this);
 		if (!clusterPrefab)
-			Debug.LogError("Queue don't have cluster prefab assigned");
+			Debug.LogError("Queue don't have cluster prefab assigned", gameObject);
 	}
 
 	private void OnDisable()
