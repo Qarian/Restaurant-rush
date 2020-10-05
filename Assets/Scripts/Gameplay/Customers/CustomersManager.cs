@@ -6,7 +6,6 @@ public class CustomersManager : MonoBehaviour
 {
     [Header("References")]
     public Transform exit = default;
-    [SerializeField] Queue queue = default;
 
     [Header("Times (seconds)")]
     [SerializeField] float newCustomerTime = 8f;
@@ -34,7 +33,7 @@ public class CustomersManager : MonoBehaviour
     }
 	#endregion
 
-	private void Start()
+    private void Start()
     {
         selectedCustomers = null;
         if (freeTables.Count == 0)
@@ -81,8 +80,6 @@ public class CustomersManager : MonoBehaviour
         CustomersCluster ret = selectedCustomers;
         selectedCustomers.AssignToTable(table);
         freeTables.Remove(table);
-        // Increase number of custer clusters inside building
-        TakeClusterFromQueue(selectedCustomers);
         // clear selection
         selectedCustomers = null;
         return ret;
@@ -120,14 +117,9 @@ public class CustomersManager : MonoBehaviour
 
 	public void EndTime()
 	{
-		queue.CloseQueue();
+		QueueManager.CloseQueues();
         spawningCustomers = false;
         if (customersInside == 0)
             GameManager.singleton.EndWork();
 	}
-
-    public void TakeClusterFromQueue(CustomersCluster customersCluster)
-    {
-        queue.TakeCluster(customersCluster);
-    }
 }

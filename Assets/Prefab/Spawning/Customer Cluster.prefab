@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cee91fdec60d8f4fb256fc857515ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerPrefab: {fileID: 6606189794180718546, guid: e1a0927bd7d9aaa4285e77c91dcd30d6,
+  customerPrefab: {fileID: 1567284911585280493, guid: e1a0927bd7d9aaa4285e77c91dcd30d6,
     type: 3}
   customersPositions: {fileID: 4493208790921382921}
   numberOfCustomers: 0

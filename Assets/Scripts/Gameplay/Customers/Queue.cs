@@ -4,10 +4,10 @@ using Random = UnityEngine.Random;
 
 public class Queue : MonoBehaviour
 {
-	[SerializeField] GameObject customerCluster = default;
+	[SerializeField] CustomersCluster clusterPrefab = default;
     [SerializeField] GameObject barrier = default;
-	
-	public Vector3[] queuePositions;
+
+    private Vector3[] queuePositions;
 
     private List<CustomersCluster> clusters = new List<CustomersCluster>();
 
@@ -16,8 +16,10 @@ public class Queue : MonoBehaviour
 
 	private void OnEnable()
 	{
-		barrier.SetActive(false);
+		barrier?.SetActive(false);
 		QueueManager.AddQueue(this);
+		if (!clusterPrefab)
+			Debug.LogError("Queue don't have cluster prefab assigned");
 	}
 
 	private void OnDisable()
@@ -39,8 +41,8 @@ public class Queue : MonoBehaviour
 			}
 		}
 		
-		CustomersCluster cluster = Instantiate(customerCluster, queuePositions[maxWaitingClusters-1], Quaternion.identity).GetComponent<CustomersCluster>();
-		cluster.Create(Random.Range(1, 5), currentWaitingClusters, queuePositions[currentWaitingClusters]);
+		CustomersCluster cluster = Instantiate(clusterPrefab, queuePositions[maxWaitingClusters-1], Quaternion.identity);
+		cluster.Create(this, Random.Range(1, 5), currentWaitingClusters, queuePositions[currentWaitingClusters]);
 		clusters.Add(cluster);
 		currentWaitingClusters++;
 		if (currentWaitingClusters == maxWaitingClusters)
@@ -67,7 +69,7 @@ public class Queue : MonoBehaviour
         {
 	        cluster.LeaveRestaurant();
         }
-        barrier.SetActive(true);
+        barrier?.SetActive(true);
         queuePositions = null;
     }
 }

@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0246d7f6e5381f46acaa18b25de0635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerCluster: {fileID: 2278585955556541131, guid: 1d2e1941c942da640b8db77efbc523c2,
+  clusterPrefab: {fileID: 2506911345191872491, guid: 1d2e1941c942da640b8db77efbc523c2,
     type: 3}
   barrier: {fileID: 6575834455929039085}
 --- !u!1 &8945964399148244344

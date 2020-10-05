@@ -2,12 +2,13 @@
 
 public class CustomersCluster : MonoBehaviour
 {
-	[SerializeField] GameObject customerPrefab = default;
+	[SerializeField] Customer customerPrefab = default;
 	[SerializeField] Transform customersPositions = default;
 
 	private Transform[] customersTransforms;
 	private Customer[] customers;
 	[HideInInspector] public int numberOfCustomers;
+	private Queue queue;
 	private int orderInQueue;
 
 	private Table assignedTable;
@@ -19,8 +20,9 @@ public class CustomersCluster : MonoBehaviour
 	private float maxPatienceTime;
 
 	// Instantiate new cluster of customers
-	public void Create(int numberOfCustomers, int order, Vector3 targetPos)
+	public void Create(Queue queue, int numberOfCustomers, int order, Vector3 targetPos)
 	{
+		this.queue = queue;
 		// clear values (in case of pooling)
 		customersAtTable = 0;
 		remainingPatienceTime = CustomersManager.singleton.queuePatienceTime;
@@ -108,6 +110,9 @@ public class CustomersCluster : MonoBehaviour
 		{
 			customers[i].GoToTable(table.chairPositions.GetChild(i));
 		}
+		
+		queue.TakeCluster(this);
+		queue = null;
 	}
 
 	public void CustomerArrivedAtTable()
@@ -134,8 +139,8 @@ public class CustomersCluster : MonoBehaviour
     public void LeaveRestaurant()
     {
 	    // In Queue
-		if (orderInQueue != -1)
-			CustomersManager.singleton.TakeClusterFromQueue(this);
+	    queue?.TakeCluster(this);
+	    queue = null;
 		
 		// At table
 		if (assignedTable)
@@ -163,7 +168,6 @@ public class CustomersCluster : MonoBehaviour
     private Customer InstantiateCustomer(Vector3 position)
     {
         //TODO: Pooling for customers
-        GameObject newCustomer = Instantiate(customerPrefab, position, Quaternion.identity, null);
-        return newCustomer.GetComponent<Customer>();
+        return Instantiate(customerPrefab, position, Quaternion.identity, null);
     }
 }

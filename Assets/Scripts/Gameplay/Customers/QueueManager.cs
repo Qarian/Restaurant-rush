@@ -26,4 +26,12 @@ public static class QueueManager
     {
         availableQueues.Remove(queue);
     }
+
+    public static void CloseQueues()
+    {
+        foreach (Queue queue in availableQueues)
+        {
+            queue.CloseQueue();
+        }
+    }
 }
