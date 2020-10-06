@@ -16,7 +16,7 @@ public class Queue : MonoBehaviour
 
 	private void OnEnable()
 	{
-		barrier?.SetActive(false);
+		if (barrier) barrier.SetActive(false);
 		QueueManager.AddQueue(this);
 		if (!clusterPrefab)
 			Debug.LogError("Queue don't have cluster prefab assigned", gameObject);
@@ -69,7 +69,8 @@ public class Queue : MonoBehaviour
         {
 	        cluster.LeaveRestaurant();
         }
-        barrier?.SetActive(true);
+
+        if (barrier) barrier.SetActive(true);
         queuePositions = null;
     }
 }
