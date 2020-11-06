@@ -88,6 +88,8 @@ public class CustomersCluster : MonoBehaviour
 	// disable interactive component on all customers
 	public void SelectCustomer()
 	{
+		reducePatience = false;
+
 		if (CustomersManager.selectedCustomers == null)
 		{
             CustomersManager.singleton.SelectCustomer(this);
@@ -104,7 +106,6 @@ public class CustomersCluster : MonoBehaviour
 	{
 		orderInQueue = -1;
 		assignedTable = table;
-		reducePatience = false;
 
 		for (int i = 0; i < numberOfCustomers; i++)
 		{
@@ -151,7 +152,8 @@ public class CustomersCluster : MonoBehaviour
 
 		for (int i = 0; i < numberOfCustomers; i++)
         {
-            customers[i].SetDestination(CustomersManager.singleton.exit, DeleteCustomers);
+			customers[i].Disable();
+			customers[i].SetDestination(CustomersManager.singleton.exit, DeleteCustomers);
         }
     }
 

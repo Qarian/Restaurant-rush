@@ -30,6 +30,8 @@ public class Customer : MonoBehaviour
             !agent.pathPending &&
             agent.remainingDistance < agent.stoppingDistance)
         {
+            if (!agent.pathPending)
+                Debug.LogWarning("Customer can't find a path to the destination");
             action();
             action = null;
         }
